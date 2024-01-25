@@ -9,9 +9,16 @@ CREATE TABLE User (
     PRIMARY KEY (user_id)
 );
 
+CREATE TABLE AddressType (
+    address_type_id INT NOT NULL AUTO_INCREMENT,
+    address_type VARCHAR(10) NOT NULL,
+    PRIMARY KEY (address_type_id)
+);
+
 CREATE TABLE UserAddress (
     user_address_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
+    address_type_id INT NOT NULL,
     address_1 VARCHAR(30),
     address_2 VARCHAR(30),
     city VARCHAR(25),
@@ -19,8 +26,14 @@ CREATE TABLE UserAddress (
     zip VARCHAR(10),
     country VARCHAR(30),
     PRIMARY KEY (user_address_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id)
 );
+
+ALTER TABLE UserAddress
+ADD address_type_id INT NOT NULL;
+ALTER TABLE UserAddress
+ADD CONSTRAINT FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id);
 
 CREATE TABLE UserInfo (
     user_info_id INT NOT NULL AUTO_INCREMENT,
