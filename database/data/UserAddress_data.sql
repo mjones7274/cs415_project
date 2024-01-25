@@ -19,3 +19,14 @@ INSERT INTO UserAddress (user_id,address_1,address_2,city,st,zip,country)
         '84033',
         'United States'
         );
+
+INSERT INTO UserAddress (user_id,address_1,address_2,city,st,zip,country)
+    VALUES (
+        2,
+        '200 Fake Ave',
+        '',
+        'Fakie City',
+        'UT',
+        '84033',
+        'United States'
+        );
