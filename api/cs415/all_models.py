@@ -40,10 +40,10 @@ class Phonetype(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=25, blank=True, null=True)
-    last_name = models.CharField(max_length=30, blank=True, null=True)
-    email = models.CharField(max_length=40, blank=True, null=True)
-    pass_word = models.CharField(max_length=40, blank=True, null=True)
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=40)
+    pass_word = models.CharField(max_length=40)
     created_date = models.DateTimeField(blank=True, null=True)
     is_active = models.IntegerField(blank=True, null=True)
 
