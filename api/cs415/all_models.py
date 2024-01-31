@@ -42,10 +42,11 @@ class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=40)
+    email = models.CharField(unique=True, max_length=40)
     pass_word = models.CharField(max_length=40)
     created_date = models.DateTimeField(blank=True, null=True)
     is_active = models.IntegerField(blank=True, null=True)
+    last_login = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -161,6 +162,16 @@ class AuthUserUserPermissions(models.Model):
         managed = False
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
+
+
+class AuthtokenToken(models.Model):
+    key = models.CharField(primary_key=True, max_length=40)
+    created = models.DateTimeField()
+    user = models.OneToOneField(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'authtoken_token'
 
 
 class DjangoAdminLog(models.Model):

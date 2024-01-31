@@ -1,6 +1,16 @@
 from rest_framework import serializers
 from cs415.models import User, Useraddress, Userinfo, Userphone, Phonetype, Pagedata, Addresstype
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        # fields = ['user_id', 'first_name', 'last_name', 'email' , 'pass_word', 'created_date', 'is_active']
+        fields = '__all__'
+class PageDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Pagedata
+        fields='__all__'
+
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -69,10 +79,4 @@ class PhoneSerializerPost(serializers.ModelSerializer):
 class UserinfoSerializer(serializers.ModelSerializer):
     class Meta:
         model=Userinfo
-        fields='__all__'
-
-
-class PageDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model= Pagedata
         fields='__all__'

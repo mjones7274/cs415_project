@@ -20,6 +20,7 @@ from cs415 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.Login.as_view()),
     path('users/', views.UserAPIView.as_view()),
     path('addresses/', views.AddressAPIView.as_view()),
     path('phones/', views.PhoneAPIView.as_view()),

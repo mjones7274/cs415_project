@@ -1,18 +1,22 @@
 CREATE TABLE User (
     user_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(25),
-    last_name VARCHAR(30),
-    email VARCHAR(40),
-    pass_word VARCHAR(40),
+    first_name VARCHAR(25) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    email VARCHAR(40) NOT NULL,
+    pass_word VARCHAR(40) NOT NULL,
     created_date DATETIME,
     is_active BOOLEAN,
-    PRIMARY KEY (user_id)
+    PRIMARY KEY (user_id),
+    UNIQUE (email)
 );
 
 ALTER TABLE User MODIFY first_name VARCHAR(25) NOT NULL;
 ALTER TABLE User MODIFY last_name VARCHAR(30) NOT NULL;
 ALTER TABLE User MODIFY email VARCHAR(40) NOT NULL;
 ALTER TABLE User MODIFY pass_word VARCHAR(40) NOT NULL;
+ALTER TABLE User ADD last_login DATETIME;
+ALTER TABLE User ADD UNIQUE (email);
+
 
 CREATE TABLE AddressType (
     address_type_id INT NOT NULL AUTO_INCREMENT,

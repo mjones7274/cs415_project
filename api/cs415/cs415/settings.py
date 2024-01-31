@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
     'cs415',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -83,7 +84,7 @@ DATABASES = {
         'NAME': 'cs415website',
         'USER': 'apiuser',
         'PASSWORD': 'apiuserpass',
-        'HOST': '18.232.75.72',
+        'HOST': '54.86.246.76',
         'PORT': '3306'
 
     }
