@@ -5,12 +5,13 @@ from cs415.models import User, Useraddress, Userphone, Phonetype, Userinfo, Page
 from cs415.serializers import UserSerializer, AddressSerializerPost, AddressSerializerGet, PhoneSerializerGet, PhoneSerializerPost
 from cs415.serializers import PhoneTypeSerializer, UserinfoSerializer, PageDataSerializer, AddressTypeSerializer
 from django.contrib.auth import login
-import datetime
-import jwt
+from cs415.settings import JWT_AUTH
+from cs415.authentication import JWTAuthentication
 
 
 class UserAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -19,12 +20,14 @@ class UserAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response({'users': serializer.data})
 
 class PageDataAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = PageDataSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -33,6 +36,7 @@ class PageDataAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         page_datas = Pagedata.objects.all()
         serializer = PageDataSerializer(page_datas, many=True)
         return Response({'pages': serializer.data})
@@ -61,16 +65,7 @@ class Login(APIView):
         user = User.objects.get(email = email, pass_word=password)
         if user is not None:
             login(request, user)
-            token = {
-                "user_id": user.user_id,
-                "scope": 'admin',
-                "first_name": user.first_name,
-                "last_name": user.last_name,
-                "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=8),
-                "iat": datetime.datetime.utcnow()
-            }
-            key = 'valhalla'
-            jwt_token = jwt.encode(token, key=key, algorithm="HS256")
+            jwt_token = JWTAuthentication.create_jwt(user)
             data = {
                 'token': jwt_token
             }
@@ -85,6 +80,7 @@ class Login(APIView):
 
 class GetSingleUserAPIView(APIView):
     def get(self,request,id):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user_data = {}
         user = User.objects.get(pk=id)
         user_serial = UserSerializer(user)
@@ -99,6 +95,7 @@ class GetSingleUserAPIView(APIView):
 
 class AddressAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = AddressSerializerPost(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -107,12 +104,14 @@ class AddressAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user_addresses = Useraddress.objects.all()
         serializer = AddressSerializerGet(user_addresses, many=True)
         return Response({'user_addresses': serializer.data})
 
 class UserAddressAPIView(APIView):
     def get(self,request,id):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user = User.objects.get(pk=id)
         addresses = Useraddress.objects.filter(user=user)
         serializer = AddressSerializerGet(addresses, many=True)
@@ -120,6 +119,7 @@ class UserAddressAPIView(APIView):
 
 class PhoneAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = PhoneSerializerPost(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -128,12 +128,14 @@ class PhoneAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user_phones = Userphone.objects.all()
         serializer = PhoneSerializerGet(user_phones, many=True)
         return Response({'user_phones': serializer.data})
 
 class UserPhoneAPIView(APIView):
     def get(self,request,id):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user = User.objects.get(pk=id)
         phones = Userphone.objects.filter(user=user)
         serializer = PhoneSerializerGet(phones, many=True)
@@ -141,6 +143,7 @@ class UserPhoneAPIView(APIView):
 
 class PhoneTypeAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = PhoneTypeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -149,12 +152,14 @@ class PhoneTypeAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         phone_types = Phonetype.objects.all()
         serializer = PhoneTypeSerializer(phone_types, many=True)
         return Response({'phone_types': serializer.data})
 
 class AddressTypeAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = AddressTypeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -163,12 +168,14 @@ class AddressTypeAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         address_types = Addresstype.objects.all()
         serializer = AddressTypeSerializer(address_types, many=True)
         return Response({'address_types': serializer.data})
 
 class UserInfoAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         serializer = UserinfoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -177,12 +184,14 @@ class UserInfoAPIView(APIView):
             return Response({'errors': serializer.errors},
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user_infos = Userinfo.objects.all()
         serializer = UserinfoSerializer(user_infos, many=True)
         return Response({'user_infos': serializer.data})
 
 class GetSingleUserInfoAPIView(APIView):
     def get(self,request,id):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         user = User.objects.get(pk=id)
         info = Userinfo.objects.filter(user=user)
         serializer = UserinfoSerializer(info, many=True)
@@ -190,6 +199,7 @@ class GetSingleUserInfoAPIView(APIView):
 
 class GetSinglePageDataAPIView(APIView):
     def get(self,request,id):
+        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
         page = Pagedata.objects.get(pk=id)
         serializer = PageDataSerializer(page)
         return Response({'page': serializer.data})

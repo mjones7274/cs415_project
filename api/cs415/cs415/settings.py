@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'cs415website',
         'USER': 'apiuser',
         'PASSWORD': 'apiuserpass',
-        'HOST': '54.86.246.76',
+        'HOST': '52.205.219.80',
         'PORT': '3306'
 
     }
@@ -93,6 +93,9 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
+# Turn on/off jwt Auth Header validation
+JWT_AUTH = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
