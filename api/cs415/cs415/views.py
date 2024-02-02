@@ -4,7 +4,6 @@ from rest_framework import status
 from cs415.models import User, Useraddress, Userphone, Phonetype, Userinfo, Pagedata, Addresstype
 from cs415.serializers import UserSerializer, AddressSerializerPost, AddressSerializerGet, PhoneSerializerGet, PhoneSerializerPost
 from cs415.serializers import PhoneTypeSerializer, UserinfoSerializer, PageDataSerializer, AddressTypeSerializer
-from django.contrib.auth import login
 from cs415.settings import JWT_AUTH
 from cs415.authentication import JWTAuthentication
 
@@ -64,7 +63,6 @@ class Login(APIView):
                              status=status.HTTP_401_UNAUTHORIZED)
         user = User.objects.get(email = email, pass_word=password)
         if user is not None:
-            login(request, user)
             jwt_token = JWTAuthentication.create_jwt(user)
             data = {
                 'token': jwt_token
