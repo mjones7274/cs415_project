@@ -1,3 +1,4 @@
+import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +12,8 @@ from cs415.authentication import JWTAuthentication
 class UserAPIView(APIView):
     def post(self, request, *args, **kwargs):
         if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
+        request.data['created_date'] = str(datetime.datetime.now())
+        request.data['is_active'] = 1
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -62,12 +65,19 @@ class Login(APIView):
                              'error': 'Incorrect password for user'},
                              status=status.HTTP_401_UNAUTHORIZED)
         user = User.objects.get(email = email, pass_word=password)
+
+        # add last login to User table
+        serializer = UserSerializer(user, data={'last_login': str(datetime.datetime.now())}, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
         if user is not None:
             jwt_token = JWTAuthentication.create_jwt(user)
             data = {
                 'token': jwt_token
             }
             return Response({'success': True,
+                             'user_id': user.user_id,
                              'token': jwt_token},
                              status=status.HTTP_200_OK)
         else:
