@@ -6,17 +6,10 @@ CREATE TABLE User (
     pass_word VARCHAR(40) NOT NULL,
     created_date DATETIME,
     is_active BOOLEAN,
+    last_login DATETIME;
     PRIMARY KEY (user_id),
     UNIQUE (email)
 );
-
-ALTER TABLE User MODIFY first_name VARCHAR(25) NOT NULL;
-ALTER TABLE User MODIFY last_name VARCHAR(30) NOT NULL;
-ALTER TABLE User MODIFY email VARCHAR(40) NOT NULL;
-ALTER TABLE User MODIFY pass_word VARCHAR(40) NOT NULL;
-ALTER TABLE User ADD last_login DATETIME;
-ALTER TABLE User ADD UNIQUE (email);
-
 
 CREATE TABLE AddressType (
     address_type_id INT NOT NULL AUTO_INCREMENT,
@@ -38,11 +31,6 @@ CREATE TABLE UserAddress (
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id)
 );
-
-ALTER TABLE UserAddress
-ADD address_type_id INT NOT NULL;
-ALTER TABLE UserAddress
-ADD CONSTRAINT FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id);
 
 CREATE TABLE UserInfo (
     user_info_id INT NOT NULL AUTO_INCREMENT,

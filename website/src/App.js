@@ -3,7 +3,6 @@ import { BrowserRouter as Router,
           Routes,
           Route,
           Link} from "react-router-dom";
-import Axios from "axios";
 import './App.css';
 import { useRoutes } from "react-router-dom";
 import { RegisterForm } from "./Components/RegisterForm";
