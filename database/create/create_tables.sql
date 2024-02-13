@@ -6,7 +6,7 @@ CREATE TABLE User (
     pass_word VARCHAR(40) NOT NULL,
     created_date DATETIME,
     is_active BOOLEAN,
-    last_login DATETIME;
+    last_login DATETIME,
     PRIMARY KEY (user_id),
     UNIQUE (email)
 );
