@@ -14,10 +14,6 @@ import Module1 from "./Components/Module1";
 import Module2 from "./Components/Module2";
 import Module3 from "./Components/Module3";
 
-// Axios.get("https://catfact.ninja/fact").then((res) => {
-//   console.log(res.data);
-// })
-
 function NoMatch() {
   return (
     <div style={{ padding: 20 }}>
