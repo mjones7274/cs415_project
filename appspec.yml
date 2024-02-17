@@ -3,4 +3,5 @@ os: linux
 files:
   - source: website/build/
     destination: /var/www/html/
-    overwrite: true
+
+file_exists_behavior: OVERWRITE
