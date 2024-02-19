@@ -15,3 +15,11 @@ sudo apt install -y apache2
 sudo systemctl start apache2
 sudo systemctl enable apache2
 
+
+Mysql Client
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+pip install mysqlclient
+
+
+
+
