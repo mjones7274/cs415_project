@@ -4,7 +4,7 @@ from cs415.models import User, Useraddress, Userinfo, Userphone, Phonetype, Page
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # fields = ['user_id', 'first_name', 'last_name', 'email' , 'pass_word', 'created_date', 'is_active']
+        # fields = ['user_id', 'first_name', 'last_name', 'email' , 'password', 'created_date', 'is_active']
         fields = '__all__'
 class PageDataSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,7 +24,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # fields = ['user_id', 'first_name', 'last_name', 'email' , 'pass_word', 'created_date', 'is_active']
+        # fields = ['user_id', 'first_name', 'last_name', 'email' , 'password', 'created_date', 'is_active']
         fields = '__all__'
 
 

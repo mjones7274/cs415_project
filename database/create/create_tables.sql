@@ -1,32 +1,32 @@
 CREATE TABLE User (
-    user_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(25) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    email VARCHAR(40) NOT NULL,
-    pass_word VARCHAR(40) NOT NULL,
-    created_date DATETIME,
-    is_active BOOLEAN,
-    last_login DATETIME,
-    PRIMARY KEY (user_id),
-    UNIQUE (email)
+  user_id int NOT NULL AUTO_INCREMENT,
+  first_name varchar(25) NOT NULL,
+  last_name varchar(30) NOT NULL,
+  email varchar(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  created_date datetime DEFAULT NULL,
+  is_active tinyint(1) DEFAULT NULL,
+  last_login datetime DEFAULT NULL,
+  PRIMARY KEY (user_id),
+  UNIQUE (email)
 );
 
 CREATE TABLE AddressType (
     address_type_id INT NOT NULL AUTO_INCREMENT,
-    address_type VARCHAR(10) NOT NULL,
+    address_type VARCHAR(20) NOT NULL,
     PRIMARY KEY (address_type_id)
 );
 
 CREATE TABLE UserAddress (
     user_address_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
-    address_type_id INT NOT NULL,
-    address_1 VARCHAR(30),
-    address_2 VARCHAR(30),
-    city VARCHAR(25),
+    street_1 VARCHAR(50),
+    street_2 VARCHAR(50),
+    city VARCHAR(35),
     st VARCHAR(2),
     zip VARCHAR(10),
     country VARCHAR(30),
+    address_type_id INT NOT NULL,
     PRIMARY KEY (user_address_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id)
@@ -36,7 +36,7 @@ CREATE TABLE UserInfo (
     user_info_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     profile_bio VARCHAR(500),
-    profile_picture VARCHAR(100),
+    profile_picture VARCHAR(150),
     modified_date DATETIME,
     created_date DATETIME,
     PRIMARY KEY (user_info_id),
@@ -62,12 +62,13 @@ CREATE TABLE UserPhone (
 );
 
 CREATE TABLE PageData (
-    page_data_id INT NOT NULL AUTO_INCREMENT,
-    page_name VARCHAR(25) NOT NULL,
-    page_title VARCHAR(25) NOT NULL,
-    page_description VARCHAR(150) NOT NULL,
-    page_picture VARCHAR(100),
-    PRIMARY KEY (page_data_id)
+  page_data_id int NOT NULL AUTO_INCREMENT,
+  page_name varchar(150) NOT NULL,
+  page_title varchar(150) NOT NULL,
+  page_description text NOT NULL,
+  page_picture varchar(250) NOT NULL,
+  page_menu varchar(35) NOT NULL,
+  PRIMARY KEY (page_data_id)
 );
 
 

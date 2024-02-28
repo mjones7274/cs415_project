@@ -68,5 +68,9 @@ sudo systemctl restart apache2
 ```
 
 
+Ugly Admin
+python manage.py collectstatic
+
+
 
 

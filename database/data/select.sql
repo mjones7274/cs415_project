@@ -6,5 +6,10 @@ SELECT * FROM User
 UPDATE UserAddress SET city = 'Faker City' WHERE user_address_id = 2;
 
 
-New Change
+Common Commands:
+SHOW COLUMNS FROM User;
+
+SHOW CREATE TABLE User;
+
+ALTER TABLE User MODIFY first_name VARCHAR(50) NOT NULL;
 

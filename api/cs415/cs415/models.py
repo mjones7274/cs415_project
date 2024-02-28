@@ -2,10 +2,11 @@ from django.db import models
 
 class Pagedata(models.Model):
     page_data_id = models.AutoField(primary_key=True)
-    page_name = models.CharField(max_length=25)
-    page_title = models.CharField(max_length=25)
-    page_description = models.CharField(max_length=150)
-    page_picture = models.CharField(max_length=100, blank=True, null=True)
+    page_name = models.CharField(max_length=150)
+    page_title = models.CharField(max_length=150)
+    page_description = models.TextField()
+    page_picture = models.CharField(max_length=250)
+    page_menu = models.CharField(max_length=35)
 
     class Meta:
         managed = False
@@ -31,7 +32,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=30)
     email = models.CharField(unique=True, max_length=40)
-    pass_word = models.CharField(max_length=40)
+    password = models.CharField(max_length=40)
     created_date = models.DateTimeField(blank=True, null=True)
     is_active = models.IntegerField(blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
@@ -57,8 +58,8 @@ class Addresstype(models.Model):
 class Useraddress(models.Model):
     user_address_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, models.DO_NOTHING)
-    address_1 = models.CharField(max_length=30, blank=True, null=True)
-    address_2 = models.CharField(max_length=30, blank=True, null=True)
+    street_1 = models.CharField(max_length=30, blank=True, null=True)
+    street_2 = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=25, blank=True, null=True)
     st = models.CharField(max_length=2, blank=True, null=True)
     zip = models.CharField(max_length=10, blank=True, null=True)
@@ -76,7 +77,7 @@ class Userinfo(models.Model):
     user_info_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, models.DO_NOTHING)
     profile_bio = models.CharField(max_length=500, blank=True, null=True)
-    profile_picture = models.CharField(max_length=100, blank=True, null=True)
+    profile_picture = models.CharField(max_length=150, blank=True, null=True)
     modified_date = models.DateTimeField(blank=True, null=True)
     created_date = models.DateTimeField(blank=True, null=True)
 
