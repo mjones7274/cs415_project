@@ -1,2 +1,5 @@
 api/cs415/cs415/__pycache__/*.*
+api/env/
 *.pyc
+*.*.pyc
+api/env/Lib/site-packages/pip/__pycache__/__init__.cpython-39.pyc
