@@ -5,6 +5,8 @@ services:
     image: image_cs415_api
     container_name: dc_cs415_api
     restart: always
+    networks:
+      - cs415-network
     ports:
       - 8080:80
 
@@ -13,13 +15,24 @@ services:
     image: image_cs415_website
     container_name: dc_cs415_website
     restart: always
+    networks:
+      - cs415-network
     ports:
       - 80:80
 
   cs415-database:
-    build:
+    build: https://github.com/mjones7274/cs415_project.git#container:database
+    image: image_cs415_database
+    container_name: dc_cs415_database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: apiuserpass
+    networks:
+      - cs415-network
+    ports:
+      - 3306:3306
 
 
-# networks:
-#   cs415-network:
+networks:
+  cs415-network:
 
