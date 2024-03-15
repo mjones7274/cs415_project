@@ -1,22 +1,25 @@
-version: '3'
+version: "3"
 services:
   cs415-api:
     build: https://github.com/mjones7274/cs415_project.git#container:api/cs415
     image: image_cs415_api
-    networks:
-      - cs415-network
     container_name: dc_cs415_api
     restart: always
     ports:
       - 8080:80
+
   cs415-website:
     build: https://github.com/mjones7274/cs415_website_nav.git#container
     image: image_cs415_website
-    networks:
-      - cs415-network
     container_name: dc_cs415_website
     restart: always
     ports:
       - 80:80
-networks:
-  cs415-network:
+
+  cs415-database:
+    build:
+
+
+# networks:
+#   cs415-network:
+
