@@ -26,7 +26,8 @@ services:
     container_name: dc_cs415_database
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: apiuserpass
+      #MYSQL_ROOT_PASSWORD: apiuserpass
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     networks:
       - cs415-network
     ports:

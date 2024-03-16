@@ -1,3 +1,5 @@
+USE cs415website;
+
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
 INSERT INTO `User` VALUES (1,'Main','User','muser@email.com','12345','2024-01-18 10:15:03',1,'2024-02-28 09:59:07'),

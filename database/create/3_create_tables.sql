@@ -1,3 +1,5 @@
+USE cs415website;
+
 CREATE TABLE User (
   user_id int NOT NULL AUTO_INCREMENT,
   first_name varchar(25) NOT NULL,
